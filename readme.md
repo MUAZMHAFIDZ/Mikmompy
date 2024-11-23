@@ -1,6 +1,6 @@
 ![MIT License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-# Proyek Ini
+# MikMomPy
 
 Proyek ini dilisensikan di bawah **Lisensi MIT**. Anda bebas untuk menggunakan, menyalin, memodifikasi, dan mendistribusikan perangkat lunak ini dengan syarat dan ketentuan yang diatur oleh lisensi tersebut.
 
