@@ -1,0 +1,19 @@
+<div>
+    <label for="profiless" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Paket*</label>
+    <select onchange="updateHiddenInput()" name="profiless" id="profiless" class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring">
+      <option value="" disabled selected>Pilih Paket</option>
+      {% for profile in profiles %}
+      <option value="{{profile.name}}">{{ profile.name }}</option>
+      {% endfor %}
+    </select>
+    <input type="hidden" name="testprofile" id="hiddenTest"/>
+  </div>
+
+  <script>
+    // Function to update the hidden input with the selected value
+    function updateHiddenInput() {
+      const selectElement = document.getElementById('profiless'); // Get the select element
+      const hiddenInput = document.getElementById('hiddenTest'); // Get the hidden input element
+      hiddenInput.value = selectElement.value; // Update hidden input with the selected value
+    }
+  </script>

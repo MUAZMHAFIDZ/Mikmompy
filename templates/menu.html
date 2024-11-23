@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Router</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="bg-white py-6 sm:py-8 lg:py-12">
+        <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+        
+            <div>
+                <a href="{{ url_for('logout') }}">
+                    <button type="button" class="text-md text-left bg-red-500 hover:bg-red-700 text-white py-2 px-5 rounded focus:outline-none focus:shadow-outline">Logout</button>
+                </a>
+            </div>
+            
+          <!-- text - start -->
+          <div class="mb-10 md:mb-16">
+            <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">Koneksi ke Router</h2>
+          </div>
+          <!-- text - end -->
+      
+          <!-- form - start -->
+          <form method="POST" class="mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2">
+            <div class="sm:col-span-2">
+                <label for="ip" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">IP HOTSPOT MIKROTIK</label>
+                <input name="ip" class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+            </div>
+
+            <div>
+              <label for="rusername" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">username*</label>
+              <input name="rusername" class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+            </div>
+      
+            <div>
+              <label for="rpassword" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">password*</label>
+              <input type="password" name="rpassword" class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+            </div>
+      
+            <div class="sm:col-span-2">
+              <label for="hotspot" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">nama HOTSPOT</label>
+              <input name="hotspot" class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+            </div>
+
+            <div class="flex items-center justify-between sm:col-span-2">
+              <button type="submit" name="create_mikrotik" class="inline-block rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base">Tambah</button>
+            </div>
+      
+          </form>
+        </div>
+      </div>
+
+    <div class="m-5 text-gray-900 bg-gray-200">
+        <div class="p-4 flex">
+            <h1 class="text-3xl">Mikrotik</h1>
+        </div>
+        <div class="px-3 py-4 flex justify-center">
+            <table class="w-full text-md bg-white shadow-md rounded mb-4">
+                <tbody>
+                    <tr class="border-b">
+                        <th class="text-left p-3 px-5">ip Mikrotik</th>
+                        <th class="text-left p-3 px-5">username</th>
+                        <th class="text-left p-3 px-5">Hotspot Name</th>
+                        <th class="text-left p-3 px-5">Action</th>
+                    </tr>
+                    {% for mikrotik in mikrotiks %}
+                    <tr class="border-b hover:bg-orange-100 bg-gray-100">
+                        <td class="p-3 px-5">
+                            <p class="bg-transparent border-b-2 border-gray-300 py-2">{{mikrotik[1]}}</p>
+                        </td>
+                        <td class="p-3 px-5">
+                            <p class="bg-transparent border-b-2 border-gray-300 py-2">{{mikrotik[2]}}</p>
+                        </td>
+                        <td class="p-3 px-5">
+                            <p class="bg-transparent border-b-2 border-gray-300 py-2">{{mikrotik[4]}}</p>
+                        </td>
+                        <td class="p-3 px-5 flex justify-end">
+                            
+                            <form method="POST" style="display:inline;">
+                                <input type="hidden" name="ip" value="{{ mikrotik[1] }}">
+                                <input type="hidden" name="rusername" value="{{ mikrotik[2] }}">
+                                <input type="hidden" name="rpassword" value="{{ mikrotik[3] }}">
+                                <input type="hidden" name="hotspot" value="{{ mikrotik[4] }}">
+                                <button type="submit" name="connect" class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Connect</button>
+                            </form>
+                            <form method="POST" style="display:inline;">
+                                <input type="hidden" name="id" value="{{ mikrotik[0] }}">
+                                <button type="submit" name="delete_mikrotik" class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="bg-white pt-4 sm:pt-10 lg:pt-12">
+        <footer class="mx-auto max-w-screen-2xl px-4 md:px-8">
+          <div class="flex flex-col items-center justify-around gap-4 border-t border-b py-6 md:flex-row">
+            <div class="py-8 text-center text-sm text-gray-400">© 2024 - MUAZ M HAFIDZ.</div>
+            <div class="flex gap-4">
+              <a href="github.com/muazmhafidz" target="_blank" class="text-gray-400 transition duration-100 hover:text-gray-500 active:text-gray-600">
+                <svg class="h-5 w-5" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </footer>
+      </div>
+</body>
+</html>
