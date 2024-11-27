@@ -32,12 +32,12 @@ def update_myuser(id, username, password):
     else:
         print("Failed to connect to the database.")
 
-def save_mikrotik(ip, username, pw, hot):
+def save_mikrotik(ip, username, pw, hot, dns):
     connection = create_connection()
     if connection:
         cursor = connection.cursor()
-        query = "INSERT INTO mikrotik (ip, username, password, hotspot_name) VALUES (%s, %s, %s, %s)"
-        cursor.execute(query, (ip, username, pw, hot))
+        query = "INSERT INTO mikrotik (ip, username, password, hotspot_name, dns_name) VALUES (%s, %s, %s, %s, %s)"
+        cursor.execute(query, (ip, username, pw, hot, dns))
         connection.commit()
         cursor.close()
         connection.close()

@@ -57,17 +57,20 @@ def menu():
             rusername = request.form['rusername']
             rpassword = request.form['rpassword']
             hotspots = request.form['hotspot']
-            save_mikrotik(ip_mikrotik, rusername, rpassword, hotspots) 
+            dnsname = request.form['dns']
+            save_mikrotik(ip_mikrotik, rusername, rpassword, hotspots, dnsname) 
             return redirect(url_for('menu'))  
         elif 'connect' in request.form:
             ip_mikrotik = request.form['ip']
             rusername = request.form['rusername']
             rpassword = request.form['rpassword']
             hotspots = request.form['hotspot']
+            dnsname = request.form['dns']
             session['ip'] = ip_mikrotik
             session['rusername'] = rusername
             session['rpassword'] = rpassword
             session['hotspot'] = hotspots
+            session['dns'] = dnsname
             return redirect(url_for('dashboard'))  
         elif 'delete_mikrotik' in request.form:
             id = request.form['id']

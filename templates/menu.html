@@ -16,13 +16,12 @@
                 </a>
             </div>
             
-          <!-- text - start -->
+            
           <div class="mb-10 md:mb-16">
             <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">Koneksi ke Router</h2>
           </div>
-          <!-- text - end -->
-      
-          <!-- form - start -->
+          
+
           <form method="POST" class="mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2">
             <div class="sm:col-span-2">
                 <label for="ip" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">IP HOTSPOT MIKROTIK</label>
@@ -40,8 +39,13 @@
             </div>
       
             <div class="sm:col-span-2">
-              <label for="hotspot" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">nama HOTSPOT</label>
+              <label for="hotspot" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">HOTSPOT NAME</label>
               <input name="hotspot" class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+            </div>
+
+            <div class="sm:col-span-2">
+              <label for="dns" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">DNS Url</label>
+              <input name="dns" class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
             </div>
 
             <div class="flex items-center justify-between sm:col-span-2">
@@ -83,6 +87,7 @@
                                 <input type="hidden" name="rusername" value="{{ mikrotik[2] }}">
                                 <input type="hidden" name="rpassword" value="{{ mikrotik[3] }}">
                                 <input type="hidden" name="hotspot" value="{{ mikrotik[4] }}">
+                                <input type="hidden" name="dns" value="{{ mikrotik[5] }}">
                                 <button type="submit" name="connect" class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Connect</button>
                             </form>
                             <form method="POST" style="display:inline;">
