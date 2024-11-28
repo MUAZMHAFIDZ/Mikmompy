@@ -8,6 +8,8 @@ import string
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
+web_title = "Mikmompy"
+
 def check_login(username, password):
     connection = create_connection()
     if connection:
@@ -44,7 +46,7 @@ def login():
         else:
             flash('Invalid login credentials!', 'error')
 
-    return render_template('login.html')
+    return render_template('login.html', web_title=web_title)
 
 
 @app.route('/menu', methods=['GET', 'POST'])
@@ -80,7 +82,7 @@ def menu():
     cur = connection.cursor()
     cur.execute("SELECT * FROM mikrotik")
     mikrotiks = cur.fetchall()  
-    return render_template('menu.html', mikrotiks=mikrotiks)
+    return render_template('menu.html', mikrotiks=mikrotiks, web_title=web_title)
 
 
 @app.route('/dashboard', methods=['GET', 'POST'])
@@ -101,7 +103,7 @@ def dashboard():
         session.clear()
         return redirect(url_for('login'))  
     
-    return render_template('dashboard.html', username=username, ip=ip, pw_login=pw_login, id_login=id_login)
+    return render_template('dashboard.html', username=username, ip=ip, pw_login=pw_login, id_login=id_login, web_title=web_title)
 
 
 @app.route('/logout')
@@ -135,7 +137,7 @@ def profiles():
         api = api_pool.get_api()
         profiles = get_all_user_profiles(api)
         api_pool.disconnect()
-        return render_template('profiles.html', profiles=profiles)
+        return render_template('profiles.html', profiles=profiles, web_title=web_title)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -188,7 +190,7 @@ def voucher():
         users.reverse()
         profiles = get_all_user_profiles(api)
         api_pool.disconnect()
-        return render_template('voucher.html', users=users, profiles=profiles)
+        return render_template('voucher.html', users=users, profiles=profiles, web_title=web_title)
     
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -230,7 +232,7 @@ def vouchermanual():
         users.reverse()
         profiles = get_all_user_profiles(api)
         api_pool.disconnect()
-        return render_template('vouchermanual.html', users=users, profiles=profiles)
+        return render_template('vouchermanual.html', users=users, profiles=profiles, web_title=web_title)
     
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -283,12 +285,14 @@ def print_voucher():
     router_ip = request.args.get('router_ip', ip)
     username = request.args.get('username', rusername)
     password = request.args.get('password', rpassword)
+    mydnst = session['dns']
+    mydns = request.args.get('dns', mydnst)
     selected_users = request.form.getlist('selected_voucher')
     try:
         api_pool = connect_to_router(router_ip, username, password)
         api = api_pool.get_api()
         voucher = get_print_user(api, selected_users)
-        return render_template('print_voucher.html', voucher=voucher)
+        return render_template('print_voucher.html', voucher=voucher, web_title=web_title, myUrl=mydns)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

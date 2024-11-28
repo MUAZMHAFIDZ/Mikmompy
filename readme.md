@@ -10,6 +10,8 @@ Untuk menginstal dependensi proyek ini, Anda dapat menggunakan `pip` untuk mengi
 install mysqlclient,routeros_api dan Flask
 import database dari import.sql
 
+username/password login: admin/admin
+
 ```bash
 pip install mysqlclient routeros_api Flask
 ```

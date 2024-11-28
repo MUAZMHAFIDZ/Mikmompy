@@ -10,7 +10,7 @@
     <div class="flex flex-wrap gap-4 p-4 bg-gray-100">
     {% for user in voucher %}
             <div class="container bg-gradient-to-r from-indigo-500 to-violet-500 text-white p-8 rounded-lg shadow-lg max-w-sm mx-auto">
-                <div class="text-3md font-bold mb-4">Mikmikmom!</div>
+                <div class="text-3md font-bold mb-4">{{ web_title }}</div>
                 <div class="text-base mb-4">username:</div>
                 <div class="bg-white text-gray-800 rounded-lg px-2 py-2 flex items-center justify-between">
                     <span class="text-2md font-semibold">{{ user[0]['name'] }}</span>
@@ -20,8 +20,8 @@
                     <span class="text-2md font-semibold">{{ user[0].password }}</span>
                 </div>
                 <div class="text-sm mt-4">
-                    <p>Paket: <span class="font-semibold">{{ user.profile }}</span></p>
-                    <p>Url: <a class="text-white" href="http://muazjavalovy.com/">http://muazjavalovy.com/</a>.</p>
+                    <p>Paket: <span class="font-semibold">{{ user[0].profile }}</span></p>
+                    <p>Url: <a class="text-white" href="http://{{myUrl}}/">http://{{myUrl}}/</a>.</p>
                 </div>
             </div>
     {% endfor %}
